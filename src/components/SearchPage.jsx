@@ -16,7 +16,8 @@ class SearchPage extends React.Component {
   };
 
   render() {
-    const { profiles = [] } = this.context;
+    const { profiles = [], rickProfiles = [] } = this.context;
+    console.log(this.context);
 
     return (
       <React.Fragment>
