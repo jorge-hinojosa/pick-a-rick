@@ -2,7 +2,7 @@ import React from 'react';
 import { ProfileContext } from './ProfilesContextProvider';
 import MinimalButton from './MinimalButton';
 import Header from './Header';
-import SearchCard from './SearchCard';
+import SearchGrid from './SearchGrid';
 
 class SearchPage extends React.Component {
   static contextType = ProfileContext;
@@ -16,9 +16,6 @@ class SearchPage extends React.Component {
   };
 
   render() {
-    const { profiles = [], rickProfiles = [] } = this.context;
-    console.log(this.context);
-
     return (
       <React.Fragment>
         <Header />
@@ -38,24 +35,7 @@ class SearchPage extends React.Component {
             </MinimalButton>
           </div>
 
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr 1fr 1fr',
-              gridGap: '16px',
-            }}
-          >
-            {profiles.map((profile) => (
-              <SearchCard
-                key={profile.id}
-                photoUrl={profile.photoUrl}
-                handle={profile.handle}
-                location={profile.location}
-                age={profile.age}
-                photoCount={profile.photoCount}
-              />
-            ))}
-          </div>
+          <SearchGrid />
         </main>
       </React.Fragment>
     );

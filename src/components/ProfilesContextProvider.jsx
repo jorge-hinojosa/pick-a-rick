@@ -19,15 +19,17 @@ function ProfilesReducer(state, action) {
       profiles.sort((profileA, profileB) => (profileA.handle < profileB.handle ? 1 : -1));
       return { profiles };
 
+    case 'GET_RICKS':
+      profiles = action.payload;
+      return { profiles };
+
     default:
       throw new Error();
   }
 }
 
 function ProfilesContextProvider({ children }) {
-  const [state, dispatch] = React.useReducer(ProfilesReducer, {
-    profiles: mockProfiles,
-  });
+  const [state, dispatch] = React.useReducer(ProfilesReducer);
 
   return (
     <ProfileContext.Provider value={{ ...state, dispatch }}>{children}</ProfileContext.Provider>
