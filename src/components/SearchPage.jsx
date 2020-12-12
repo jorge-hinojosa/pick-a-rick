@@ -18,8 +18,6 @@ class SearchPage extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Header />
-
         <main style={{ margin: 24 }}>
           <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <MinimalButton disabled>

@@ -10,7 +10,25 @@ export const GET_RICKS = gql`
         species
         gender
         image
-        created
+        location {
+          name
+        }
+      }
+    }
+  }
+`;
+
+export const GET_RICK = gql`
+  query($id: ID!) {
+    character(id: $id) {
+      id
+      name
+      status
+      species
+      gender
+      image
+      location {
+        name
       }
     }
   }

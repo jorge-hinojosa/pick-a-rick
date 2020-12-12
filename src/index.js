@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import { HashRouter as Router } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloClient } from 'apollo-client';
@@ -16,8 +17,10 @@ const client = new ApolloClient({
 
 const rootElement = document.getElementById('root');
 ReactDOM.render(
-  <ApolloProvider client={client}>
-    <App />
-  </ApolloProvider>,
+  <Router>
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
+  </Router>,
   rootElement
 );

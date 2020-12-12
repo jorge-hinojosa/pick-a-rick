@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import SearchCard from './SearchCard';
 import { ProfileContext } from './ProfilesContextProvider';
 import { useQuery } from '@apollo/react-hooks';
@@ -26,19 +27,28 @@ const SearchGrid = () => {
     >
       {c.profiles ? (
         c.profiles.map((profile) => (
-          <SearchCard
-            key={profile.id}
-            photoUrl={profile.image}
-            handle={profile.name}
-            location={profile.location}
-            // age={profile.age}
-            // photoCount={profile.photoCount}
-          />
+          <Link
+            to={`/profile/${profile.id}`}
+            style={{
+              textDecoration: 'none',
+              color: '#FFF',
+            }}
+            className="rick-card"
+          >
+            <SearchCard
+              key={profile.id}
+              photoUrl={profile.image}
+              handle={profile.name}
+              location={profile.location?.name}
+              // age={profile.age}
+              // photoCount={profile.photoCount}
+            />
+          </Link>
         ))
       ) : (
         <Fragment>
           {Array.from({ length: 20 }, (_, i) => (
-            <Skeleton />
+            <Skeleton key={i} />
           ))}
         </Fragment>
       )}

@@ -1,5 +1,4 @@
 import React from 'react';
-import mockProfiles from '../profiles.json';
 
 export const ProfileContext = React.createContext({
   profiles: [],
