@@ -1,4 +1,17 @@
 import React from 'react';
+import { Media } from 'react-matches';
+
+const MEDIA_QUERIES = {
+  sm: {
+    maxWidth: 500,
+  },
+  md: {
+    maxWidth: 919,
+  },
+  lg: {
+    minWidth: 920,
+  },
+};
 
 const styles = {
   backgroundColor: '#F3F4F4',
@@ -29,9 +42,7 @@ const stylesGrid = {
 
 const stylesProfile = {
   card: {
-    width: '100%',
     maxWidth: 820,
-    height: 500,
     boxSizing: 'border-box',
     marginTop: 15,
   },
@@ -46,5 +57,18 @@ export const GridSkeleton = () => {
 };
 
 export const ProfileSkeleton = () => {
-  return <div style={{ ...styles, ...stylesProfile.card }}></div>;
+  return (
+    <Media queries={MEDIA_QUERIES}>
+      {({ matches, resolve }) => (
+        <div
+          style={{
+            ...styles,
+            ...stylesProfile.card,
+            width: matches.sm ? '95%' : '70%',
+            height: matches.md ? 625 : 500,
+          }}
+        ></div>
+      )}
+    </Media>
+  );
 };

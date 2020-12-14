@@ -7,7 +7,7 @@ import { ProfileSkeleton } from './Skeleton';
 
 const MEDIA_QUERIES = {
   xs: {
-    maxWidth: 400,
+    maxWidth: 500,
   },
   lg: {
     minWidth: 920,
