@@ -6,16 +6,16 @@ export const ProfileContext = React.createContext({
 
 function ProfilesReducer(state, action) {
   let profiles;
-
+  console.log(state);
   switch (action.type) {
     case 'ascending':
       profiles = [...state.profiles];
-      profiles.sort((profileA, profileB) => (profileA.handle > profileB.handle ? 1 : -1));
+      profiles.sort((profileA, profileB) => (profileA.name > profileB.name ? 1 : -1));
       return { profiles };
 
     case 'descending':
       profiles = [...state.profiles];
-      profiles.sort((profileA, profileB) => (profileA.handle < profileB.handle ? 1 : -1));
+      profiles.sort((profileA, profileB) => (profileA.name < profileB.name ? 1 : -1));
       return { profiles };
 
     case 'GET_RICKS':

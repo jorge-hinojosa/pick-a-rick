@@ -48,17 +48,17 @@ const Profile = (props) => {
                   paddingBottom: matches.lg ? 50 : 0,
                 }}
               >
-                <span style={{ ...styles.bullet, justifyContent: !matches.lg && 'center' }}>
+                <span style={styles.bullet}>
                   Species: <p style={styles.bulletText}>{data.character.species}</p>
                 </span>
-                <span style={{ ...styles.bullet, justifyContent: !matches.lg && 'center' }}>
+                <span style={styles.bullet}>
                   Gender: <p style={styles.bulletText}>{data.character.gender}</p>
                 </span>
-                <span style={{ ...styles.bullet, justifyContent: !matches.lg && 'center' }}>
+                <span style={styles.bullet}>
                   Location:
                   <p style={styles.bulletText}>{data.character.location.name}</p>
                 </span>
-                <span style={{ ...styles.bullet, justifyContent: !matches.lg && 'center' }}>
+                <span style={styles.bullet}>
                   Status:
                   <p style={styles.bulletText}>{data.character.status}</p>
                 </span>
