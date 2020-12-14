@@ -1,7 +1,61 @@
 import React from 'react';
+import { Link, Redirect } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_RICK } from '../queries';
 import { ProfileSkeleton } from './Skeleton';
+
+const Profile = (props) => {
+  const { loading, error, data } = useQuery(GET_RICK, {
+    // variables: { id: 100000 },
+    variables: { id: props.match.params.id },
+  });
+
+  if (error) {
+    alert('Houston, we have a problem... ');
+    return <Redirect to="/" />;
+  }
+
+  if (data)
+    return (
+      <div style={styles.container}>
+        <div style={styles.card}>
+          <div style={styles.cardLeftInfo}>
+            <img src={data.character.image} alt={data.character.name} style={styles.image} />
+            <h1>{data.character.name}</h1>
+          </div>
+          <div style={styles.cardRightInfo}>
+            <span style={styles.bullet}>
+              Species: <p style={styles.bulletText}>{data.character.species}</p>
+            </span>
+            <span style={styles.bullet}>
+              Gender: <p style={styles.bulletText}>{data.character.gender}</p>
+            </span>
+            <span style={styles.bullet}>
+              Location:
+              <p style={styles.bulletText}>{data.character.location.name}</p>
+            </span>
+            <span style={styles.bullet}>
+              Status:
+              <p style={styles.bulletText}>{data.character.status}</p>
+            </span>
+            <h2> </h2>
+          </div>
+        </div>
+        <Link to="/">
+          <button style={styles.backButton}>Back to Results</button>
+        </Link>
+      </div>
+    );
+  else if (loading)
+    return (
+      <div style={styles.container}>
+        <ProfileSkeleton />
+      </div>
+    );
+  else return <Redirect to="/" />;
+};
+
+export default Profile;
 
 const styles = {
   container: {
@@ -28,7 +82,7 @@ const styles = {
     alignItems: 'center',
   },
   cardLeftInfo: {
-    width: '50%',
+    width: '55%',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'end',
@@ -36,45 +90,38 @@ const styles = {
     textAlign: 'center',
   },
   cardRightInfo: {
-    width: '50%',
-    marginLeft: 50,
+    width: '45%',
+    marginLeft: 0,
     paddingBottom: 50,
   },
   image: {
     maxWidth: 250,
     height: 'auto',
+    borderRadius: 8,
+  },
+  bullet: {
+    fontSize: '20px',
+    lineHeight: '22px',
+    fontWeight: 'bold',
+    display: 'flex',
+    alignItems: 'center',
+    padding: '15px 10px',
+  },
+  bulletText: {
+    margin: 0,
+    marginLeft: 15,
+    padding: 0,
+    fontSize: '22px',
+  },
+  backButton: {
+    marginTop: 20,
+    background: 'none',
+    color: 'blue',
+    border: 'none',
+    padding: 0,
+    font: 'inherit',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    outline: 'none',
   },
 };
-
-const Profile = (props) => {
-  const { loading, error, data } = useQuery(GET_RICK, {
-    variables: { id: props.match.params.id },
-  });
-
-  if (data)
-    return (
-      <div style={styles.container}>
-        <div style={styles.card}>
-          <div style={styles.cardLeftInfo}>
-            <img src={data.character.image} alt={data.character.name} style={styles.image} />
-            <h1>{data.character.name}</h1>
-          </div>
-          <div style={styles.cardRightInfo}>
-            <h2>Species: {data.character.species}</h2>
-            <h2>Gender: {data.character.gender}</h2>
-            <h2>Location: {data.character.location.name}</h2>
-            <h2>Status: {data.character.status}</h2>
-          </div>
-        </div>
-      </div>
-    );
-  else if (error) return alert('Houston, we have a problem...');
-  else if (loading)
-    return (
-      <div style={styles.container}>
-        <ProfileSkeleton />
-      </div>
-    );
-};
-
-export default Profile;
