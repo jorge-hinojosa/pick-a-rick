@@ -34,6 +34,8 @@ const SearchGrid = () => {
     }
   }, [res, c.profiles]);
 
+  const PROFILES = c.mutatedProfiles || c.profiles;
+
   return (
     <Media queries={MEDIA_QUERIES}>
       {({ resolve }) => (
@@ -50,8 +52,8 @@ const SearchGrid = () => {
             gridGap: '16px',
           }}
         >
-          {c.profiles ? (
-            c.profiles.map((profile) => (
+          {PROFILES ? (
+            PROFILES.map((profile) => (
               <SearchCard
                 key={profile.id}
                 id={profile.id}
