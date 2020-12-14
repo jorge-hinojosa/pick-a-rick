@@ -19,7 +19,7 @@ const styles = {
 
 export default class Search extends React.PureComponent {
   render() {
-    const { photoUrl = '', handle = '', location = '', id } = this.props;
+    const { photoUrl = '', handle = '', location = '', id = 1 } = this.props;
 
     return (
       <div style={styles.card}>
