@@ -3,7 +3,7 @@ import SearchCard from './SearchCard';
 import { ProfileContext } from './ProfilesContextProvider';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_RICKS } from '../queries';
-import Skeleton from './Skeleton';
+import { GridSkeleton } from './Skeleton';
 
 const SearchGrid = () => {
   const res = useQuery(GET_RICKS);
@@ -32,14 +32,12 @@ const SearchGrid = () => {
             photoUrl={profile.image}
             handle={profile.name}
             location={profile.location?.name}
-            // age={profile.age}
-            // photoCount={profile.photoCount}
           />
         ))
       ) : (
         <Fragment>
           {Array.from({ length: 20 }, (_, i) => (
-            <Skeleton key={i} />
+            <GridSkeleton key={i} />
           ))}
         </Fragment>
       )}

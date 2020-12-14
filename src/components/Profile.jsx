@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_RICK } from '../queries';
+import { ProfileSkeleton } from './Skeleton';
 
 const styles = {
   container: {
@@ -12,9 +13,10 @@ const styles = {
     alignItems: 'center',
   },
   card: {
-    width: '60%',
+    width: '70%',
     maxWidth: 820,
-    height: 400,
+    height: 500,
+    boxSizing: 'border-box',
     border: '1px solid lightgray',
     borderTop: '50px solid blue',
     borderRadius: 8,
@@ -67,7 +69,12 @@ const Profile = (props) => {
       </div>
     );
   else if (error) return alert('Houston, we have a problem...');
-  else if (loading) return <div>Loading</div>;
+  else if (loading)
+    return (
+      <div style={styles.container}>
+        <ProfileSkeleton />
+      </div>
+    );
 };
 
 export default Profile;
