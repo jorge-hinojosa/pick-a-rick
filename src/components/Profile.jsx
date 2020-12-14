@@ -5,7 +5,7 @@ import { GET_RICK } from '../queries';
 const styles = {
   container: {
     width: '100%',
-    minHeight: '100vh',
+    minHeight: 'calc(100vh - 68px)',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'start',
@@ -27,6 +27,10 @@ const Profile = (props) => {
       <div style={styles.container}>
         <img src={data.character.image} alt={data.character.name} style={styles.image} />
         <h1>{data.character.name}</h1>
+        <h2>Species: {data.character.species}</h2>
+        <h2>Gender: {data.character.gender}</h2>
+        <h2>Location: {data.character.location.name}</h2>
+        <h2>Status: {data.character.status}</h2>
       </div>
     );
   else if (error) return alert('Houston, we have a problem...');

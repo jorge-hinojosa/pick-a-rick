@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const styles = {
   card: {
@@ -10,87 +11,107 @@ const styles = {
     position: 'relative',
     width: '200px',
     height: '200px',
+    display: 'flex',
+    alignItems: 'start',
+    justifyContent: 'center',
   },
 };
 
 export default class Search extends React.PureComponent {
   render() {
-    const { photoUrl = '', handle = '', location = '', age = 99, photoCount = 0 } = this.props;
+    const { photoUrl = '', handle = '', location = '', id } = this.props;
 
     return (
       <div style={styles.card}>
-        <div
+        <Link
+          to={`/profile/${id}`}
           style={{
-            border: '1px solid lightgray',
-            borderRadius: 8,
-            boxShadow: '0 3px 6px lightgray, 0 3px 6px',
-            overflow: 'hidden',
+            textDecoration: 'none',
+            color: '#FFF',
           }}
+          className="rick-card"
         >
-          <div style={styles.avatar}>
-            <img src={photoUrl} alt="potential date"></img>
-            <div
-              style={{
-                position: 'absolute',
-                width: '100%',
-                bottom: '0',
-                borderRadius: 'inherit',
-                overflow: 'hidden',
-              }}
-            >
+          <div
+            style={{
+              border: '1px solid lightgray',
+              borderRadius: 8,
+              boxShadow: '0 3px 6px lightgray, 0 3px 6px',
+              overflow: 'hidden',
+            }}
+          >
+            <div style={styles.avatar}>
+              <img src={photoUrl} alt="potential date"></img>
+
               <div
                 style={{
-                  margin: 8,
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'flex-end',
-                  position: 'relative',
+                  position: 'absolute',
+                  width: '100%',
+                  bottom: '0',
+                  borderRadius: 'inherit',
+                  overflow: 'hidden',
                 }}
               >
                 <div
                   style={{
-                    color: 'white',
+                    margin: 8,
                     display: 'flex',
-                    flexDirection: 'column',
-                    width: '100%',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-end',
+                    position: 'relative',
                   }}
                 >
-                  <h6 style={{ fontSize: '16px ' }}>
-                    <div style={{ display: 'flex', marginBottom: '4px', alignItems: 'center' }}>
-                      {handle}
-                    </div>
-                  </h6>
                   <div
                     style={{
+                      color: 'white',
                       display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'baseline',
+                      flexDirection: 'column',
+                      width: '100%',
                     }}
                   >
-                    <div
+                    <h6
                       style={{
-                        display: 'flex',
-                        marginBottom: '4px',
-                        alignItems: 'center',
+                        fontSize: '18px ',
+                        fontWeight: 'bold',
+                        '-webkit-text-stroke-width': 1,
+                        '-webkit-text-stroke-color': 'black',
+                        margin: '0px',
+                        padding: '0px',
                       }}
                     >
-                      <span>{location ? `${age} • ${location}` : age}</span>
-                    </div>
-                    <div style={{ display: 'inline-block', height: '15px' }}>
-                      {photoCount > 1 && (
-                        <div>
-                          <div style={{ marginRight: '4px' }}>
-                            <span color="white">{photoCount}</span>
-                          </div>
-                        </div>
-                      )}
-                    </div>
+                      {handle}
+                    </h6>
+                    {location && location !== 'unknown' && (
+                      <span
+                        style={{
+                          fontSize: '16px ',
+                          fontWeight: 'bold',
+                          '-webkit-text-stroke-width': 1,
+                          '-webkit-text-stroke-color': 'black',
+                          marginTop: 4,
+                        }}
+                      >
+                        {location}
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
+
+              {/* Overlay for better legibility of User Info (JHC) */}
+              <div
+                style={{
+                  position: 'absolute',
+                  width: '100%',
+                  height: '100%',
+                  bottom: '0',
+                  borderRadius: 'inherit',
+                  backgroundColor: 'darkgrey',
+                  opacity: '0.2',
+                }}
+              ></div>
             </div>
           </div>
-        </div>
+        </Link>
       </div>
     );
   }

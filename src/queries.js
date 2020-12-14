@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 export const GET_RICKS = gql`
   query {
-    characters(page: 2, filter: { name: "rick" }) {
+    characters(page: 3, filter: { name: "rick" }) {
       results {
         id
         name
