@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_RICK } from '../queries';
 
@@ -10,6 +10,33 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'start',
     alignItems: 'center',
+  },
+  card: {
+    width: '60%',
+    maxWidth: 820,
+    height: 400,
+    border: '1px solid lightgray',
+    borderTop: '50px solid blue',
+    borderRadius: 8,
+    boxShadow: '0 3px 6px lightgray, 0 3px 6px',
+    padding: '25px 40px',
+    marginTop: 15,
+    display: 'flex',
+    justifyContent: 'start',
+    alignItems: 'center',
+  },
+  cardLeftInfo: {
+    width: '50%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'end',
+    alignItems: 'center',
+    textAlign: 'center',
+  },
+  cardRightInfo: {
+    width: '50%',
+    marginLeft: 50,
+    paddingBottom: 50,
   },
   image: {
     maxWidth: 250,
@@ -25,12 +52,18 @@ const Profile = (props) => {
   if (data)
     return (
       <div style={styles.container}>
-        <img src={data.character.image} alt={data.character.name} style={styles.image} />
-        <h1>{data.character.name}</h1>
-        <h2>Species: {data.character.species}</h2>
-        <h2>Gender: {data.character.gender}</h2>
-        <h2>Location: {data.character.location.name}</h2>
-        <h2>Status: {data.character.status}</h2>
+        <div style={styles.card}>
+          <div style={styles.cardLeftInfo}>
+            <img src={data.character.image} alt={data.character.name} style={styles.image} />
+            <h1>{data.character.name}</h1>
+          </div>
+          <div style={styles.cardRightInfo}>
+            <h2>Species: {data.character.species}</h2>
+            <h2>Gender: {data.character.gender}</h2>
+            <h2>Location: {data.character.location.name}</h2>
+            <h2>Status: {data.character.status}</h2>
+          </div>
+        </div>
       </div>
     );
   else if (error) return alert('Houston, we have a problem...');
