@@ -1,12 +1,21 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import { Media } from 'react-matches';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_RICK } from '../queries';
 import { ProfileSkeleton } from './Skeleton';
 
+const MEDIA_QUERIES = {
+  xs: {
+    maxWidth: 400,
+  },
+  lg: {
+    minWidth: 920,
+  },
+};
+
 const Profile = (props) => {
   const { loading, error, data } = useQuery(GET_RICK, {
-    // variables: { id: 100000 },
     variables: { id: props.match.params.id },
   });
 
@@ -17,34 +26,51 @@ const Profile = (props) => {
 
   if (data)
     return (
-      <div style={styles.container}>
-        <div style={styles.card}>
-          <div style={styles.cardLeftInfo}>
-            <img src={data.character.image} alt={data.character.name} style={styles.image} />
-            <h1>{data.character.name}</h1>
+      <Media queries={MEDIA_QUERIES}>
+        {({ matches }) => (
+          <div style={styles.container}>
+            <div
+              style={{
+                ...styles.card,
+                padding: matches.xs ? '10px 25px' : '25px 40px',
+                width: matches.xs ? '95%' : '70%',
+                height: matches.lg ? 500 : 'auto',
+                flexDirection: matches.lg ? 'row' : 'column',
+              }}
+            >
+              <div style={{ ...styles.cardAvatar, width: matches.lg ? '55%' : '100%' }}>
+                <img src={data.character.image} alt={data.character.name} style={styles.image} />
+                <h1>{data.character.name}</h1>
+              </div>
+              <div
+                style={{
+                  width: matches.lg ? '45%' : '100%',
+                  paddingBottom: matches.lg ? 50 : 0,
+                }}
+              >
+                <span style={{ ...styles.bullet, justifyContent: !matches.lg && 'center' }}>
+                  Species: <p style={styles.bulletText}>{data.character.species}</p>
+                </span>
+                <span style={{ ...styles.bullet, justifyContent: !matches.lg && 'center' }}>
+                  Gender: <p style={styles.bulletText}>{data.character.gender}</p>
+                </span>
+                <span style={{ ...styles.bullet, justifyContent: !matches.lg && 'center' }}>
+                  Location:
+                  <p style={styles.bulletText}>{data.character.location.name}</p>
+                </span>
+                <span style={{ ...styles.bullet, justifyContent: !matches.lg && 'center' }}>
+                  Status:
+                  <p style={styles.bulletText}>{data.character.status}</p>
+                </span>
+                <h2> </h2>
+              </div>
+            </div>
+            <Link to="/">
+              <button style={styles.backButton}>Back to Results</button>
+            </Link>
           </div>
-          <div style={styles.cardRightInfo}>
-            <span style={styles.bullet}>
-              Species: <p style={styles.bulletText}>{data.character.species}</p>
-            </span>
-            <span style={styles.bullet}>
-              Gender: <p style={styles.bulletText}>{data.character.gender}</p>
-            </span>
-            <span style={styles.bullet}>
-              Location:
-              <p style={styles.bulletText}>{data.character.location.name}</p>
-            </span>
-            <span style={styles.bullet}>
-              Status:
-              <p style={styles.bulletText}>{data.character.status}</p>
-            </span>
-            <h2> </h2>
-          </div>
-        </div>
-        <Link to="/">
-          <button style={styles.backButton}>Back to Results</button>
-        </Link>
-      </div>
+        )}
+      </Media>
     );
   else if (loading)
     return (
@@ -67,32 +93,23 @@ const styles = {
     alignItems: 'center',
   },
   card: {
-    width: '70%',
     maxWidth: 820,
-    height: 500,
     boxSizing: 'border-box',
     border: '1px solid lightgray',
     borderTop: '50px solid blue',
     borderRadius: 8,
     boxShadow: '0 3px 6px lightgray, 0 3px 6px',
-    padding: '25px 40px',
     marginTop: 15,
     display: 'flex',
     justifyContent: 'start',
     alignItems: 'center',
   },
-  cardLeftInfo: {
-    width: '55%',
+  cardAvatar: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'end',
     alignItems: 'center',
     textAlign: 'center',
-  },
-  cardRightInfo: {
-    width: '45%',
-    marginLeft: 0,
-    paddingBottom: 50,
   },
   image: {
     maxWidth: 250,
