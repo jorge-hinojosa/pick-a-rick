@@ -1,7 +1,6 @@
 import React from 'react';
 import { ProfileContext } from './ProfilesContextProvider';
 import MinimalButton from './MinimalButton';
-import Header from './Header';
 import SearchGrid from './SearchGrid';
 
 class SearchPage extends React.Component {

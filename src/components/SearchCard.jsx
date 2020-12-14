@@ -72,8 +72,8 @@ export default class Search extends React.PureComponent {
                       style={{
                         fontSize: '18px ',
                         fontWeight: 'bold',
-                        '-webkit-text-stroke-width': 1,
-                        '-webkit-text-stroke-color': 'black',
+                        WebkitTextStrokeWidth: 1,
+                        WebkitTextStrokeColor: 'black',
                         margin: '0px',
                         padding: '0px',
                       }}
@@ -85,8 +85,8 @@ export default class Search extends React.PureComponent {
                         style={{
                           fontSize: '16px ',
                           fontWeight: 'bold',
-                          '-webkit-text-stroke-width': 1,
-                          '-webkit-text-stroke-color': 'black',
+                          WebkitTextStrokeWidth: 0.8,
+                          WebkitTextStrokeColor: 'black',
                           marginTop: 4,
                         }}
                       >

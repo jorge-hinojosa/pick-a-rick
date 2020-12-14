@@ -27,7 +27,6 @@ const MEDIA_QUERIES = {
 const SearchGrid = () => {
   const res = useQuery(GET_RICKS);
   const c = useContext(ProfileContext);
-  console.log(c);
 
   useEffect(() => {
     if (res && !c.profiles) {
